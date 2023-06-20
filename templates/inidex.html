@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>レシピ検索</title>
+</head>
+<body>
+    <h1>レシピ検索</h1>
+    <form action="/result/{query}" method="post">
+        <input type="text" name="query" placeholder="検索クエリを入力してください">
+        <input type="number" name="top_k" placeholder="表示件数を入力してください" min="1">
+        <input type="submit" value="検索">
+    </form>
+</body>
+</html>

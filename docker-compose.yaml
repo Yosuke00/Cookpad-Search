@@ -1,0 +1,11 @@
+version: '3'
+services:
+  search-app:
+    build: .
+    volumes:
+      - .dockervenv:/app/.venv
+      - .:/app
+    ports:
+      - 8000:8000  # ホストマシンのポート8000を、docker内のポート8000に接続する
+volumes:
+  mysql_data:

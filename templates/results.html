@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>検索結果</title>
+</head>
+<body>
+    <h1>検索結果</h1>
+    <h2>検索クエリ: {{ query }}</h2>
+    <h2>表示件数: {{ results|length }}</h2>
+    <ul>
+        {%for result in results%}
+            <li>{{result}}</li>
+        {%endfor%}
+    </ul>
+</body>
+</html>
+
