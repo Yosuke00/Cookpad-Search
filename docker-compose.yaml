@@ -6,6 +6,6 @@ services:
       - .dockervenv:/app/.venv
       - .:/app
     ports:
-      - 8000:8000  # ホストマシンのポート8000を、docker内のポート8000に接続する
+      - 8000:8000  
 volumes:
   mysql_data:
