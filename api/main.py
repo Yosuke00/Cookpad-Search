@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import aiohttp
-from api.model import SearchModel
+from model import SearchModel
 
 #FastAPIのインスタンス化
 app = FastAPI()
