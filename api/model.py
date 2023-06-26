@@ -4,7 +4,7 @@ import numpy as np
 from tqdm.notebook import tqdm
 import torch 
 from torch.utils.data import DataLoader
-from api.API_model import AugSBERT
+from API_model import AugSBERT
 from pinecone import Index
 import pinecone
 
