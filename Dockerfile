@@ -20,4 +20,4 @@ RUN mkdir /app/templates
 WORKDIR /app/templates/
 COPY ./templates/* ./
 
-ENTRYPOINT ["poetry", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload",  "--port", "80"]
+ENTRYPOINT ["poetry", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload"]
