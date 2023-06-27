@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import aiohttp
 from api.model import SearchModel
+import uvicorn
 
 #FastAPIのインスタンス化
 app = FastAPI()
@@ -23,3 +24,5 @@ async def semantic_search(query:str, top_k:int):
     results = model.get_result(query, top_k)  # 検索結果を取得
     return results
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)
