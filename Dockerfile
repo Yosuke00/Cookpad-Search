@@ -10,8 +10,14 @@ COPY pyproject.toml* poetry.lock* ./
 RUN poetry config virtualenvs.in-project true
 RUN if [ -f pyproject.toml ]; then poetry install --no-root; fi
 
-COPY ./api ./
+RUN mkdir /app/api
+WORKDIR /app/api/
+COPY ./api/* ./
 
-COPY ./templates ./
+WORKDIR /app/
+
+RUN mkdir /app/templates
+WORKDIR /app/templates/
+COPY ./templates/* ./
 
 ENTRYPOINT ["poetry", "run", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--reload"]
