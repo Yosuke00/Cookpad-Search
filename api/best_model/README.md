@@ -43,11 +43,12 @@ from transformers import AutoTokenizer, AutoModel
 import torch
 
 
-#Mean Pooling - Take attention mask into account for correct averaging
-def mean_pooling(model_output, attention_mask):
+# Max Pooling - Take the max value over time for every dimension. 
+def max_pooling(model_output, attention_mask):
     token_embeddings = model_output[0] #First element of model_output contains all token embeddings
     input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
-    return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
+    token_embeddings[input_mask_expanded == 0] = -1e9  # Set padding tokens to large negative value
+    return torch.max(token_embeddings, 1)[0]
 
 
 # Sentences we want sentence embeddings for
@@ -64,8 +65,8 @@ encoded_input = tokenizer(sentences, padding=True, truncation=True, return_tenso
 with torch.no_grad():
     model_output = model(**encoded_input)
 
-# Perform pooling. In this case, mean pooling.
-sentence_embeddings = mean_pooling(model_output, encoded_input['attention_mask'])
+# Perform pooling. In this case, max pooling.
+sentence_embeddings = max_pooling(model_output, encoded_input['attention_mask'])
 
 print("Sentence embeddings:")
 print(sentence_embeddings)
@@ -120,7 +121,7 @@ Parameters of the fit()-Method:
 ```
 SentenceTransformer(
   (0): Transformer({'max_seq_length': 512, 'do_lower_case': False}) with Transformer model: BertModel 
-  (1): Pooling({'word_embedding_dimension': 768, 'pooling_mode_cls_token': False, 'pooling_mode_mean_tokens': True, 'pooling_mode_max_tokens': False, 'pooling_mode_mean_sqrt_len_tokens': False})
+  (1): Pooling({'word_embedding_dimension': 768, 'pooling_mode_cls_token': False, 'pooling_mode_mean_tokens': False, 'pooling_mode_max_tokens': True, 'pooling_mode_mean_sqrt_len_tokens': False})
 )
 ```
 

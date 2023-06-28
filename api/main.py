@@ -13,9 +13,9 @@ templates = Jinja2Templates(directory='templates')
 model = SearchModel()
 
 #表示画面
-@app.get("/", response_class=HTMLResponse)
-def home(query:str, request: Request):
-    return templates.TemplateResponse("index.html", {"request": request,'query':query})
+@app.get("/",)
+def home():
+    return print('portの語尾に/docsをつけよう!!')
 
 #クエリの入力が行われると結果をPOSTするメソッド
 @app.post('/result/{query}')

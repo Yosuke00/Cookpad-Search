@@ -65,7 +65,7 @@ class AugSBERT(nn.Module):
         self.num_labels = num_labels
         #モデルの定義
         self.bert = models.Transformer(model_name)
-        self.pooling = models.Pooling(self.bert.get_word_embedding_dimension())
+        self.pooling = models.Pooling(768, pooling_mode_max_tokens=True, pooling_mode_mean_tokens=False)
         self.model = SentenceTransformer(modules=[self.bert, self.pooling])
         
     def sampling(self, gold_data:list, target_data:list, num_epochs:int=5)->list:

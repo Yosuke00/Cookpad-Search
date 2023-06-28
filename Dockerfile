@@ -14,11 +14,6 @@ RUN mkdir /app/api
 WORKDIR /app/api/
 COPY ./api/* ./
 
-WORKDIR /app/
-
-RUN mkdir /app/templates
-WORKDIR /app/templates/
-COPY ./templates/* ./
 
 WORKDIR /app/
 
